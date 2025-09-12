@@ -1,0 +1,26 @@
+.search {
+  width: 30vw;
+  position: relative;
+  display: flex;
+}
+/* .searchTerm { */
+  /* width: 100%;
+border: 1.5px solid #9d9696;
+  padding: 5px;
+  height: 27px;
+  border-radius: 10px;
+  outline: none; */
+/* } */
+
+.searchTerm {
+  width: 100%;
+  padding: 11px 12px 11px 36px; /* space for icon */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: url('/icons/search.png') no-repeat 10px center;
+  background-size: 16px;
+   outline: none; 
+}
+.searchTerm:focus{
+border: 1px solid dodgerblue;
+}

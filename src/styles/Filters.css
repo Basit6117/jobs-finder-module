@@ -1,0 +1,21 @@
+.select-section {
+  color: black;
+ padding: 10px 12px 10px 12px; 
+  border-radius: 10px;
+  font-family: "urbanist";
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+  border: 1px solid #ccc;
+  margin-left: 7px;
+}
+.select-section > option {
+  background-color: white;
+  padding: 0.6rem 2.4rem;
+  border-radius: 20px;
+  margin-top: 6rem;
+}
+.select-section:focus {
+  border: 1px solid dodgerblue;
+  outline: none;
+}
