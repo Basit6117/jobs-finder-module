@@ -1,20 +1,18 @@
 import React from 'react'
-import  "../styles/Searchbar.css"
+import "../styles/Filters.css"
 const Searchbar = ({search, setSearch}) => {
   function handleChange(e){
    setSearch(e.target.value)
   }
   return (
-<div class="wrap">
-   <div class="search">
+   <div className="search"> 
       <input 
         type="text" 
         value={search} 
         onChange={handleChange} 
         className="searchTerm" 
-        placeholder="Job title" />
-   </div>
-</div>
+        placeholder="Job title, keywords" />
+  </div>
   )
 }
 

@@ -25,7 +25,7 @@ const Filters = (
     )
   ];
   return (
-    <>
+    <section className="select-container">
       <select value={selectedLocation} onChange={handleLocOptions} className='select-section' name="" id="">
         <option value="all">All Locations</option>
         {uniqueLocations.map((loc, index) => (
@@ -47,7 +47,7 @@ const Filters = (
         <option value="full_time">Full Time</option>
         <option value="part_time">Part Time</option>
       </select>
-    </>
+    </section>
   )
 }
 

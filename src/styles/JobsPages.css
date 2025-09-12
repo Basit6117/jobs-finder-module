@@ -3,10 +3,12 @@
   justify-content: center;
   align-items: center;
   padding-block: 20px;
+  gap: 10px;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
+
 h1 {
-  font-size: 30px;
+  font-size: clamp(1.5rem, calc(4vw + 0.5rem), 2rem);
   line-height: 1.5em;
   font-family: "Playfair Display", serif;
   text-transform: uppercase;
@@ -14,16 +16,23 @@ h1 {
   color: #333333;
 }
 main {
-  padding: min(50px, 7%);
+  padding: min(50px, 3%);
 }
 .card {
   padding: 2em;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
   color: #374151;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
-.card > span{
-  background-color: #F4F4F4;
+.card > .span-parent{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.card > .span-parent > span {
+  background-color: #f4f4f4;
   margin-left: 5px;
   padding: 8px;
   border-radius: 50px;
@@ -31,23 +40,36 @@ main {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 15px;
-  justify-content: center;
+  justify-content: stretch;
 }
-.card > button > a{
+.card > button > a {
   text-decoration: none;
   color: white;
 }
-.card > button{
-  background-color: #315E8C;
+.card > button {
+  background-color: #315e8c;
   transition: opacity 0.3s ease;
   padding: 10px 15px;
   color: white;
   border-radius: 5px;
   border: none;
 }
-.card > button:hover{
-
+.card > button:hover {
   opacity: 0.8;
+}
+@media screen and (max-width: 768px) {
+  .header-container{
+    display:grid;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .grid-container {
+  display: grid;
+  gap: 15px;
+  justify-content: stretch;
+  grid-template-columns: 1fr;
+}
 }

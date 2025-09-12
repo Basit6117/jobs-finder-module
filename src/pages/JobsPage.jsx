@@ -3,8 +3,8 @@ import Searchbar from '../components/Searchbar'
 import Filters from '../components/Filters'
 import { useEffect, useState } from "react"
 import JobsGrid from "../components/JobsGrid"
-import JobCard from "../components/JobCard"
 import Loading from "../components/Loading"
+import ErrorMsg from "../components/ErrorMsg"
 
 
 const JobsPage = () => {
@@ -14,6 +14,7 @@ const JobsPage = () => {
   const [filter, setFilter] = useState("all")
   const [selectedLocation, setSelectedLocation] = useState("all")
   const [timeFilter, setTimeFilter] = useState("all");
+  const [error, setError] = useState("")
 
 
   useEffect(() => {
@@ -22,93 +23,102 @@ const JobsPage = () => {
       .then(res => res.json())
       .then(data => {
         setJobs(data.jobs)
-        setLoading(false)   
+        setLoading(false)
       })
+      .catch(() => {
+        setError("⚠️ Failed to fetch jobs. Please try again later.");
+        setLoading(false);
+      });
 
-       
+
   }, [])
 
-  //handle search input | search data
+
   const searchJob = (job) => {
-    if (search) {
-      // console.log(job)
-      return job.title.toLowerCase().includes(search.toLowerCase())
-    } return job;
+  if (search) {
+    const term = search.toLowerCase();
+    const inTitle = job.title.toLowerCase().includes(term);
+    const inTags = job.tags?.some(tag => 
+      tag.toLowerCase().includes(term)
+    );
+
+    return inTitle || inTags;
   }
-
-//handle selection | filter data
-const filterJobType = (job) =>{
-if(filter === 'all'){
-  return job
-} else{
-  return job.job_type === filter
-}
-}
-
-//location search
-const filterByLocation = (job) => {
-  if (selectedLocation === "all") return true;
-  return job.candidate_required_location
-           .toLowerCase()
-           .includes(selectedLocation.toLowerCase());
-};
- //time filter
-const filterByTime = (job) => {
-  if (timeFilter === "all") return true;
-
-  const jobDate = new Date(job.publication_date);
-  const today = new Date();
-
-  if (timeFilter === "24h") {
-    return (today - jobDate) / (1000 * 60 * 60) <= 24;
-  } 
-  if (timeFilter === "7d") {
-    return (today - jobDate) / (1000 * 60 * 60 * 24) <= 7;
-  }
-  if (timeFilter === "30d") {
-    return (today - jobDate) / (1000 * 60 * 60 * 24) <= 30;
-  }
-
   return true;
 };
 
+  //filter with job type
+  const filterJobType = (job) => {
+    if (filter === 'all') {
+      return job
+    } else {
+      return job.job_type === filter
+    }
+  }
 
+  // filter with location
+  const filterByLocation = (job) => {
+    if (selectedLocation === "all") return true;
+    return job.candidate_required_location
+      .toLowerCase()
+      .includes(selectedLocation.toLowerCase());
+  };
+  //filter with time
+  const filterByTime = (job) => {
+    if (timeFilter === "all") return true;
 
-  //search and filter logic
-  const filterJobs = jobs.filter((indJob) => 
+    const jobDate = new Date(job.publication_date);
+    const today = new Date();
+
+    if (timeFilter === "24h") {
+      return (today - jobDate) / (1000 * 60 * 60) <= 24;
+    }
+    if (timeFilter === "7d") {
+      return (today - jobDate) / (1000 * 60 * 60 * 24) <= 7;
+    }
+    if (timeFilter === "30d") {
+      return (today - jobDate) / (1000 * 60 * 60 * 24) <= 30;
+    }
+
+    return true;
+  };
+
+console.log(jobs)
+
+  //search and filters logic
+  const filterJobs = jobs.filter((indJob) =>
     searchJob(indJob)
-  && filterJobType(indJob)
-  && filterByLocation(indJob)
-  && filterByTime(indJob)
-   )
-  console.log(jobs)
+    && filterJobType(indJob)
+    && filterByLocation(indJob)
+    && filterByTime(indJob)
+  )
   return (
     <>
       <header className='header-container'>
         <Searchbar search={search} setSearch={setSearch} setLoading={setLoading} />
-        <Filters 
-        filter={filter} 
-        setFilter={setFilter} 
-        setLoading={setLoading} 
-        jobs={jobs}
-        selectedLocation={selectedLocation}
-        setSelectedLocation={setSelectedLocation}
-        timeFilter={timeFilter}
-        setTimeFilter={setTimeFilter}
+        <Filters
+          filter={filter}
+          setFilter={setFilter}
+          setLoading={setLoading}
+          jobs={jobs}
+          selectedLocation={selectedLocation}
+          setSelectedLocation={setSelectedLocation}
+          timeFilter={timeFilter}
+          setTimeFilter={setTimeFilter}
         />
       </header>
       <main>
-       <h1>Explore Opportunities {filterJobs.length}</h1>
-       {
-         filterJobs.length > 0 ? 
-         <JobsGrid filterJobs={filterJobs} /> : 
-         <p>Oops No Jobs Found</p>
-       }
+        <h1>Explore Opportunities</h1>
+        {loading ? (
+          <Loading />
+        ) : filterJobs.length === 0 ? (
+          <p>No jobs found. Try adjusting your search or filters.</p>
+        ) : (
+          <JobsGrid filterJobs={filterJobs} />
+        )}
+        {error && <ErrorMsg message={error} />}
 
-       {loading && 
-   <Loading />
-}
-        </main>
+      </main>
     </>
   )
 }

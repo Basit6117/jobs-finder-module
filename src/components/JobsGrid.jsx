@@ -5,8 +5,8 @@ const JobsGrid = ({ filterJobs }) => {
         <>
             <div className="grid-container">
                 {
-                    filterJobs.map((job, index) => {
-                        return <JobCard currJob={job} index={index} />
+                    filterJobs.map((job) => {
+                        return <JobCard currJob={job} key={job.id}/>
                     })
                 }
             </div>
