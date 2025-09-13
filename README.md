@@ -18,7 +18,7 @@ See `/demo` folder for:
 - `screenshot-mobile.png`
 - `screenshot-filter.png`
 - `screenshot-no-results.png`
-- `demo.mp4` (30–60s showing: search → filter → apply)
+- `demo.mp4` (showing: search → filter → apply)
 
 ---
 
@@ -31,7 +31,7 @@ See `/demo` folder for:
 ## Setup — Run locally
 1. Clone or unzip the project and `cd` into it:
    ```bash
-   git clone <your-repo-url> 
+   git clone https://github.com/Basit6117/jobs-finder-module.git 
    cd jobs-finder-module
 
 ---
