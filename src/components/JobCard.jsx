@@ -3,9 +3,13 @@ const JobCard = ({ currJob}) => {
     //job salary regex
     const salaryToShow = /\d/.test(currJob.salary);
     return (
-        <div className="card">
+        <div 
+        className="card"
+          tabIndex="0"
+          role="button"
+        >
             <h2>{currJob.title}</h2>
-            <p>Company Name: {currJob.company_name}</p>
+            <p> <b>Company Name:</b> {currJob.company_name}</p>
             <br />
             <div className="span-parent">
             <span> {currJob.candidate_required_location}</span>
@@ -13,7 +17,7 @@ const JobCard = ({ currJob}) => {
             {salaryToShow && <span>{currJob.salary}</span>}
             </div>
             <p>
-                Posted on: {new Date(currJob.publication_date).toLocaleDateString("en-US", {
+               <b>Posted on:</b> {new Date(currJob.publication_date).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "short",
                     day: "numeric"

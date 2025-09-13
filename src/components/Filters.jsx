@@ -8,13 +8,6 @@ const Filters = (
     timeFilter,
     setTimeFilter
   }) => {
-  function handleOptions(e) {
-    setFilter(e.target.value)
-
-  }
-  function handleLocOptions(e) {
-    setSelectedLocation(e.target.value)
-  }
   const uniqueLocations = [
     ...new Set(
       jobs.flatMap(job =>
@@ -26,21 +19,33 @@ const Filters = (
   ];
   return (
     <section className="select-container">
-      <select value={selectedLocation} onChange={handleLocOptions} className='select-section' name="" id="">
+      <select 
+      value={selectedLocation} 
+      onChange={(e)=>setSelectedLocation(e.target.value)} 
+      className='select-section' 
+      >
         <option value="all">All Locations</option>
         {uniqueLocations.map((loc, index) => (
           <option key={index} value={loc}>{loc}</option>
         ))}
       </select>
-      <select value={timeFilter} onChange={(e)=>setTimeFilter(e.target.value)} className='select-section' name="" id="">
-        <option disabled selected value="all">Any Date</option>
+      <select 
+      value={timeFilter} 
+      onChange={(e)=>setTimeFilter(e.target.value)} 
+      className='select-section' 
+      >
+        <option disabled value="all">Any Date</option>
         <option value="all">All</option>
         <option value="24h">Last 24 hours</option>
         <option value="7d">Last 7 days</option>
         <option value="30d">Last 30 days</option>
       </select>
-      <select value={filter} onChange={handleOptions} className='select-section' name="" id="">
-        <option disabled selected value="all" >Job Type</option>
+      <select 
+      value={filter} 
+      onChange={(e)=>setFilter(e.target.value)} 
+      className='select-section' 
+      >
+        <option disabled value="all" >Job Type</option>
         <option value="all">All</option>
         <option value="internship">Internship</option>
         <option value="contract">Contract</option>

@@ -6,7 +6,6 @@ import JobsGrid from "../components/JobsGrid"
 import Loading from "../components/Loading"
 import ErrorMsg from "../components/ErrorMsg"
 
-
 const JobsPage = () => {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(false)
@@ -19,7 +18,7 @@ const JobsPage = () => {
 
   useEffect(() => {
     setLoading(true)
-    fetch("https://remotive.com/api/remote-jobs?limit=500")
+    fetch("https://remotive.com/api/remote-jobs?limit=100")
       .then(res => res.json())
       .then(data => {
         setJobs(data.jobs)
@@ -83,8 +82,6 @@ const JobsPage = () => {
     return true;
   };
 
-console.log(jobs)
-
   //search and filters logic
   const filterJobs = jobs.filter((indJob) =>
     searchJob(indJob)
@@ -111,7 +108,7 @@ console.log(jobs)
         <h1>Explore Opportunities</h1>
         {loading ? (
           <Loading />
-        ) : filterJobs.length === 0 ? (
+        ) : filterJobs.length === 0 && error === "" ? (
           <p>No jobs found. Try adjusting your search or filters.</p>
         ) : (
           <JobsGrid filterJobs={filterJobs} />
