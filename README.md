@@ -1,12 +1,48 @@
-# React + Vite
+# Jobs Finder Module
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Author:** `Abdul Basit`  
+**Project:** Design & Implement the Jobs & Internships Module (Frontend)  
+**Tech:** React + Vite, plain CSS, Fetch API
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What this is
+A small React frontend module that lets students explore, search, and apply for jobs/internships.  
+It integrates with the Remotive public API and includes search, filters (job type, location, time posted), and an “Apply Now” button that opens the original posting.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Demo / Screenshots
+See `/demo` folder for:
+- `screenshot-desktop.png`
+- `screenshot-mobile.png`
+- `screenshot-filter.png`
+- `screenshot-no-results.png`
+- `demo.mp4` (30–60s showing: search → filter → apply)
+
+---
+
+## Prerequisites
+- Node.js (v16+ recommended) and npm installed
+- Internet connection (uses Remotive API)
+
+---
+
+## Setup — Run locally
+1. Clone or unzip the project and `cd` into it:
+   ```bash
+   git clone <your-repo-url> 
+   cd jobs-finder-module
+
+---
+## Component Overview
+
+- **App.jsx** → Root component, renders `JobsPage`.
+- **JobsPage.jsx** → Main page with search, filters, job listing, and loader.
+- **Searchbar.jsx** → Input field for searching jobs by title and other keywords.
+- **Filters.jsx** → Dropdowns for job type, location, and date posted.
+- **JobsGrid.jsx** → Grid layout that maps over jobs and renders `JobCard` components.
+- **JobCard.jsx** → Displays individual job details (title, company, salary, date, apply link).
+- **Error.jsx** → Simple error message component (e.g., "Failed to fetch jobs").
+- **Loader (FadeLoader)** → Spinner shown while fetching jobs or applying filters.
+

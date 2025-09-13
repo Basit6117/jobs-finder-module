@@ -18,7 +18,7 @@ const JobsPage = () => {
 
   useEffect(() => {
     setLoading(true)
-    fetch("https://remotive.com/api/remote-jobs?limit=100")
+    fetch("https://remotive.com/api/remote-jobs?limit=500")
       .then(res => res.json())
       .then(data => {
         setJobs(data.jobs)
